@@ -1,5 +1,6 @@
 
 var deck = [];
+var playerHand = [];
 var players = 4;
 
 // IT- Inizializzo il mazzo inserendo le carte da Asso a Re con 4 cicli, uno per ogni seme.
@@ -31,3 +32,15 @@ function createHand() {
     }
     return hand;
 }
+
+// IT- Mostro il contenuto, per controllo.
+// EN- Show for check.
+function show(nowISeeYou) {
+    document.getElementById("simplepokergame").innerHTML = nowISeeYou.map(function(item) {
+        return item.card + "-" + item.suit
+    }).join("<br />");
+}
+
+createDeck();
+playerHand = createHand();
+show(playerHand);
