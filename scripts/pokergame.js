@@ -11,16 +11,16 @@ var players = 4;
 function createDeck() {
     let deck = []; 
     for (i=2; i<=14; i++) {
-        deck.push({"card" : i, "suit" : "H"});        
+        deck.push({"value" : i, "suit" : 4});        
     }
     for (i=2; i<=14; i++) {
-        deck.push({"card" : i, "suit" : "D"});        
+        deck.push({"value" : i, "suit" : 3});        
     }
     for (i=2; i<=14; i++) {
-        deck.push({"card" : i, "suit" : "C"});        
+        deck.push({"value" : i, "suit" : 2});        
     }
     for (i=2; i<=14; i++) {
-        deck.push({"card" : i, "suit" : "S"});        
+        deck.push({"value" : i, "suit" : 1});        
     }
     return deck;
 }
@@ -33,18 +33,25 @@ function createHand() {
         let luck = Math.floor(Math.random() * playDeck.length); // Numero casuale che individua una carta all'interno del mazzo. / Random number that identifies a card in the deck.
         hand = hand.concat(playDeck.splice(luck,1)); // Inserire la carta casuale nella mano dal giocatore e al contempo eliminarla dal mazzo. / Insert the random card into the player's hand and remove it from the deck at the same time.
     }
-    hand.sort(function (a, b) { return a.card - b.card; }); // Ordinare la mano del giocatore. / Order the player's hand.
+    hand.sort(function (a, b) { return a.value - b.value; }); // Ordinare la mano del giocatore. / Order the player's hand.
     return hand;
+}
+
+// IT- Controllo colore.
+// EN- Check for flush.
+function isFlush(cardsHand) {
+    return  cardsHand.every(checkSuit => checkSuit.suit === cardsHand[0].suit);
 }
 
 // IT- Mostro il contenuto, per controllo.
 // EN- Show for check.
 function show(nowISeeYou) {
     document.getElementById("simplepokergame").innerHTML = nowISeeYou.map(function(item) {
-        return item.card + "-" + item.suit
+        return item.value + "-" + item.suit
     }).join("<br />");
 }
 
 playDeck = createDeck();
 playerHand = createHand();
+
 show(playerHand);
