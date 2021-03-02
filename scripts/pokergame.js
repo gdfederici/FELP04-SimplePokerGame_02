@@ -11,16 +11,16 @@ var players = 4;
 function createDeck() {
     let deck = []; 
     for (i=2; i<=14; i++) {
-        deck.push({"value" : i, "suit" : 4});        
+        deck.push({"rank" : i, "suit" : 4});        
     }
     for (i=2; i<=14; i++) {
-        deck.push({"value" : i, "suit" : 3});        
+        deck.push({"rank" : i, "suit" : 3});        
     }
     for (i=2; i<=14; i++) {
-        deck.push({"value" : i, "suit" : 2});        
+        deck.push({"rank" : i, "suit" : 2});        
     }
     for (i=2; i<=14; i++) {
-        deck.push({"value" : i, "suit" : 1});        
+        deck.push({"rank" : i, "suit" : 1});        
     }
     return deck;
 }
@@ -33,7 +33,7 @@ function createHand() {
         let luck = Math.floor(Math.random() * playDeck.length); // Numero casuale che individua una carta all'interno del mazzo. / Random number that identifies a card in the deck.
         hand = hand.concat(playDeck.splice(luck,1)); // Inserire la carta casuale nella mano dal giocatore e al contempo eliminarla dal mazzo. / Insert the random card into the player's hand and remove it from the deck at the same time.
     }
-    hand.sort(function (a, b) { return a.value - b.value; }); // Ordinare la mano del giocatore. / Order the player's hand.
+    hand.sort(function (a, b) { return a.rank - b.rank; }); // Ordinare la mano del giocatore. / Order the player's hand.
     return hand;
 }
 
@@ -47,17 +47,48 @@ function isFlush(cardsHand) {
 // EN- Check for straight.
 function isStraight(cardsHand) {
     var straight = true;
-    if (cardsHand[0] !== 2 && cardsHand[4] !== 14) {
+    if (cardsHand[0].rank !== 2 && cardsHand[4].rank !== 14) {
         for (i=0; i<4; i++) {
-            if (cardsHand[i].value+1 !== cardsHand[i+1].value) { straight = false; break; }
+            if (cardsHand[i].rank+1 !== cardsHand[i+1].rank) { straight = false; break; }
         }
     } else {
         for (i=0; i<3; i++) {
-            if (cardsHand[i].value+1 !== cardsHand[i+1].value) { straight = false; break; }
+            if (cardsHand[i].rank+1 !== cardsHand[i+1].rank) { straight = false; break; }
         }
     }
     return straight;
 }
+
+// IT- Controllo carte dello stesso valore.
+// EN- Check for cards of the same rank.
+function isSame(cardsHand) {
+    let sameRank = 0;
+    for (i=0; i<cardsHand.length-1; i++) {
+        if (cardsHand[i].rank == cardsHand[i+1].rank) { sameRank++; }
+        else { differentRank = differentRank.concat(i); }
+    }
+    // IT- Grazie alla mano ordinata, il numero di carte uguali e la posizione delle diverse permettono la valutazione.
+    // EN- Thanks to the orderly hand, the number of identical cards and the position of the different ones allow evaluation.
+    switch (sameRank) {
+        case 3: // Poker e full. / Four of a Kind and Full House.
+            if (cardsHand[1].ran==cardsHand[3].rank) { points = 22; }
+            else { points = 21; }
+            break;
+        case 2: // Tris e Doppia Coppia. / Three of a Kind and Two Pair.
+            if ( (differentRank[0] == 2 && differentRank[1] == 3) || (differentRank[0] == 0 && differentRank[1] == 3) || (differentRank[0] == 0 && differentRank[1] == 1) ) { points = 17; }
+            else { points = 16; }
+            break;
+        case 1: // Coppia. / Pair.
+            points = 15;
+            break;
+        case 0: // Carta più alta. / High card.
+            points = cardsHand[4].rank;
+            break;
+        default: // Errore. / Some go wrong.
+            points = 0;
+    }
+}
+
 
 
 
@@ -65,7 +96,7 @@ function isStraight(cardsHand) {
 // EN- Show for check.
 function show(nowISeeYou) {
     document.getElementById("simplepokergame").innerHTML = nowISeeYou.map(function(item) {
-        return item.value + "-" + item.suit
+        return item.rank + "-" + item.suit
     }).join("<br />");
 }
 
