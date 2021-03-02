@@ -43,6 +43,18 @@ function isFlush(cardsHand) {
     return  cardsHand.every(checkSuit => checkSuit.suit === cardsHand[0].suit);
 }
 
+// IT- Controllo scala.
+// EN- Check for straight.
+function isStraight(cardsHand) {
+    var straight = true;
+    for (i=0; i<4; i++) {
+        if (cardsHand[i].value+1 !== cardsHand[i+1].value) { straight = false; break; }
+    }
+    return straight;
+}
+
+
+
 // IT- Mostro il contenuto, per controllo.
 // EN- Show for check.
 function show(nowISeeYou) {
