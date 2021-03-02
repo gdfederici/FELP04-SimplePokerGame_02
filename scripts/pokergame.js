@@ -47,8 +47,14 @@ function isFlush(cardsHand) {
 // EN- Check for straight.
 function isStraight(cardsHand) {
     var straight = true;
-    for (i=0; i<4; i++) {
-        if (cardsHand[i].value+1 !== cardsHand[i+1].value) { straight = false; break; }
+    if (cardsHand[0] !== 2 && cardsHand[4] !== 14) {
+        for (i=0; i<4; i++) {
+            if (cardsHand[i].value+1 !== cardsHand[i+1].value) { straight = false; break; }
+        }
+    } else {
+        for (i=0; i<3; i++) {
+            if (cardsHand[i].value+1 !== cardsHand[i+1].value) { straight = false; break; }
+        }
     }
     return straight;
 }
