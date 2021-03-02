@@ -10,17 +10,10 @@ var players = 4;
 // Cuori/Hearts = 4, Quadri/Diamonds = 3, Fiori/Clubs = 2, Picche/Spades = 1 
 function createDeck() {
     let deck = []; 
-    for (i=2; i<=14; i++) {
-        deck.push({"rank" : i, "suit" : 4});        
-    }
-    for (i=2; i<=14; i++) {
-        deck.push({"rank" : i, "suit" : 3});        
-    }
-    for (i=2; i<=14; i++) {
-        deck.push({"rank" : i, "suit" : 2});        
-    }
-    for (i=2; i<=14; i++) {
-        deck.push({"rank" : i, "suit" : 1});        
+    for (j=1; j<=4; j++) {
+        for (i=2; i<=14; i++) {
+            deck.push({"rank" : i, "suit" : j});        
+        }
     }
     return deck;
 }
@@ -46,23 +39,24 @@ function isFlush(cardsHand) {
 // IT- Controllo scala.
 // EN- Check for straight.
 function isStraight(cardsHand) {
-    var straight = true;
+    let checkStraight = true;
     if (cardsHand[0].rank !== 2 && cardsHand[4].rank !== 14) {
         for (i=0; i<4; i++) {
-            if (cardsHand[i].rank+1 !== cardsHand[i+1].rank) { straight = false; break; }
+            if (cardsHand[i].rank+1 !== cardsHand[i+1].rank) { checkStraight = false; break; }
         }
     } else {
         for (i=0; i<3; i++) {
-            if (cardsHand[i].rank+1 !== cardsHand[i+1].rank) { straight = false; break; }
+            if (cardsHand[i].rank+1 !== cardsHand[i+1].rank) { checkStraight = false; break; }
         }
     }
-    return straight;
+    return checkStraight;
 }
 
 // IT- Controllo carte dello stesso valore.
 // EN- Check for cards of the same rank.
 function isSame(cardsHand) {
     let sameRank = 0;
+    let differentRank = [];
     for (i=0; i<cardsHand.length-1; i++) {
         if (cardsHand[i].rank == cardsHand[i+1].rank) { sameRank++; }
         else { differentRank = differentRank.concat(i); }
@@ -87,9 +81,8 @@ function isSame(cardsHand) {
         default: // Errore. / Some go wrong.
             points = 0;
     }
+    return points;
 }
-
-
 
 
 // IT- Mostro il contenuto, per controllo.
