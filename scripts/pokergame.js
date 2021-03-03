@@ -57,6 +57,7 @@ function isStraight(cardsHand) {
 function isSame(cardsHand) {
     let sameRank = 0;
     let differentRank = [];
+    let points = 0;
     for (i=0; i<cardsHand.length-1; i++) {
         if (cardsHand[i].rank == cardsHand[i+1].rank) { sameRank++; }
         else { differentRank = differentRank.concat(i); }
@@ -65,18 +66,18 @@ function isSame(cardsHand) {
     // EN- Thanks to the orderly hand, the number of identical cards and the position of the different ones allow evaluation.
     switch (sameRank) {
         case 3: // Poker e full. / Four of a Kind and Full House.
-            if (cardsHand[1].ran==cardsHand[3].rank) { points = 22; }
-            else { points = 21; }
+            if (cardsHand[1].ran==cardsHand[3].rank) { points = 800; }
+            else { points = 700; }
             break;
         case 2: // Tris e Doppia Coppia. / Three of a Kind and Two Pair.
-            if ( (differentRank[0] == 2 && differentRank[1] == 3) || (differentRank[0] == 0 && differentRank[1] == 3) || (differentRank[0] == 0 && differentRank[1] == 1) ) { points = 17; }
-            else { points = 16; }
+            if ( (differentRank[0] == 2 && differentRank[1] == 3) || (differentRank[0] == 0 && differentRank[1] == 3) || (differentRank[0] == 0 && differentRank[1] == 1) ) { points = 300; }
+            else { points = 200; }
             break;
         case 1: // Coppia. / Pair.
-            points = 15;
+            points = 100;
             break;
         case 0: // Carta più alta. / High card.
-            points = cardsHand[4].rank;
+            points = 0;
             break;
         default: // Errore. / Some go wrong.
             points = 0;
@@ -85,11 +86,34 @@ function isSame(cardsHand) {
 }
 
 // IT- Calcolo valore carte del giocatore.
-// EN- Computing player's card value.
+// EN- Computing player's card rank value.
 function isSum(cardsHand) {
     let valueCards = cardsHand.map(a => a.rank);
     var sum = valueCards.reduce( (total, value) => total + value);
-    console.log(sum);
+    return sum;
+}
+
+// IT- Calcolo valore mano.
+// EN- Computin player's hand value.
+function finalScore(cardsHand) {
+    let scoreFinal = 0;
+    let flush = isFlush(cardsHand);
+    let straight = isStraight(cardsHand);
+    let rankSum = isSum(cardsHand);
+    if (flush && straight) { 
+        cardsHand[3].card === 13 ? scoreFinal = 1000 : scoreFinal = 900;
+        return scoreFinal + rankSum; 
+    };
+    if (straight) { 
+        cardsHand[3].card === 13 ? scoreFinal = 500 : scoreFinal = 400;
+        return scoreFinal + rankSum;
+    };
+    if (flush) { 
+        scoreFinal = 600;
+        return scoreFinal + rankSum;
+    };
+    scoreFinal = isSame(cardsHand);
+    return scoreFinal + rankSum;
 }
 
 
@@ -105,4 +129,4 @@ playDeck = createDeck();
 playerHand = createHand();
 
 show(playerHand);
-isSum(playerHand);
+console.log(finalScore(playerHand));
