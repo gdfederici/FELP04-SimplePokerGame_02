@@ -92,11 +92,11 @@ function isSame(cardsHand) {
         case 3: // Poker e full. / Four of a Kind and Full House.
             if (cardsHand[1].rank === cardsHand[3].rank) { 
                 sameResult.points = 8;
-                (cardsHand[0].rank === cardsHand[1].rank) ? sameResult.card1 = cardsHand[0].rank : sameResult.card1 = cardsHand[1].rank;
+                (cardsHand[0].rank === cardsHand[1].rank) ? sameResult.card1 = cardsHand[0].rank : sameResult.card1 = cardsHand[1].rank; // Valore del poker. / Rank of four of a kind.
             }
             else { 
                 sameResult.points = 7;
-                if (cardsHand[0].rank === cardsHand[2].rank) {
+                if (cardsHand[0].rank === cardsHand[2].rank) { // Valore del tris e della coppia. / Rank of three of a kind and of pair.
                     sameResult.card1 = cardsHand[0].rank; 
                     sameResult.card2 = cardsHand[3].rank;
                 }
@@ -109,12 +109,12 @@ function isSame(cardsHand) {
         case 2: // Tris e Doppia Coppia. / Three of a Kind and Two Pair.
             if ( (differentRank[0] === 2 && differentRank[1] === 3) || (differentRank[0] === 0 && differentRank[1] === 3) || (differentRank[0] === 0 && differentRank[1] === 1) ) {
                 sameResult.points = 3;
-                if (cardsHand[0].rank === cardsHand[2].rank ) { sameResult.card1 = cardsHand[0].rank; }
+                if (cardsHand[0].rank === cardsHand[2].rank ) { sameResult.card1 = cardsHand[0].rank; } // Valore del tris. / Rank of three of a kind.
                 else { (cardsHand[1].rank === cardsHand[3].rank) ? sameResult.card1 = cardsHand[1].rank : sameResult.card1 = cardsHand[2].rank; }
             }
             else { 
                 sameResult.points = 2;
-                if (cardsHand[0].rank === cardsHand[1].rank) {
+                if (cardsHand[0].rank === cardsHand[1].rank) { // Valore della doppia coppia. / Rank of double pair.
                     sameRusult.card2 = cardsHand[0].rank;
                     (cardsHand[2].rank === cardsHand[3].rank) ? sameResult.card1 = cardsHand[2].rank : sameResult.card1 = cardsHand[3].rank;
                 }
@@ -127,7 +127,7 @@ function isSame(cardsHand) {
         case 1: // Coppia. / Pair.
             sameResult.points = 1;
             for (i=0; i<=3; i++) {
-                if (differentRank[i] !== i) {
+                if (differentRank[i] !== i) { // Valore della coppia. / Rank of pair.
                     sameResult.card1 = cardsHand[i].rank;
                     break;
                 }
@@ -135,7 +135,7 @@ function isSame(cardsHand) {
             break;
         case 0: // Carta più alta. / High card.
             sameResult.points = 0;
-            sameResult.card1 = cardsHand[4].rank;
+            sameResult.card1 = cardsHand[4].rank; // Valore della carta più alta. / Rank of high card.
             break;
         default: // Errore. / Some go wrong.
             points = -10000;
@@ -143,8 +143,8 @@ function isSame(cardsHand) {
     return sameResult;
 }
 
-// IT- Calcolo valore carte del giocatore.
-// EN- Computing player's card rank value.
+// IT- Calcolo somma valore tutte carte del giocatore.
+// EN- Computing sum all player's card rank value.
 function isSum(cardsHand) {
     let valueCards = cardsHand.map(a => a.rank);
     var sum = valueCards.reduce( (total, value) => total + value);
@@ -158,7 +158,7 @@ function finalScore(cardsHand) {
     let flush = isFlush(cardsHand);
     let straight = isStraight(cardsHand);
     let rankSum = isSum(cardsHand);
-    if (flush && straight) { 
+    if (flush && straight) { // Scala reale. / Royal flush.
         cardsHand[3].rank === 13 ? scoreFinal.points = 10 : scoreFinal.points = 9;
         scoreFinal.card1 = cardsHand[3].rank;
         scoreFinal.card2 = cardsHand[0].rank;
