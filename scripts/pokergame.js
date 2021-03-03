@@ -3,6 +3,17 @@ var playDeck = [];
 var playerHand = [];
 var allPlayersHands = [];
 var players = 4;
+var score = ["High card",
+            "Pair",
+            "Two Pair",
+            "Three of a Kind",
+            "Straight",
+            "Straight Ace",
+            "Flush",
+            "Full House",
+            "Four of a Kind",
+            "Straight Flush",
+            "Royal Flush" ];
 
 // IT- Inizializzo il mazzo inserendo le carte da Asso a Re con 4 cicli, uno per ogni seme.
 // EN- Create the deck by inserting cards A -> King with 4 cycles, one for each suit.
@@ -32,6 +43,17 @@ function createHand() {
 function createHand2() {
     let hand = [ {'rank' : 10, 'suit' : 2}, {'rank' : 11, 'suit' : 2}, {'rank' : 12, 'suit' : 2}, {'rank' : 13, 'suit' : 2}, {'rank' : 14, 'suit' : 2},];
     return hand;
+}
+
+function createPlay() {
+    /*allPlayersHands.push(createHand());
+    allPlayersHands.push(createHand());
+    allPlayersHands.push(createHand());
+    allPlayersHands.push(createHand());*/
+    for (i=0; i<4; i++) {
+        allPlayersHands.push(createHand());
+    };
+    return allPlayersHands;
 }
 
 // IT- Controllo colore.
@@ -71,11 +93,11 @@ function isSame(cardsHand) {
     switch (sameRank) {
         case 3: // Poker e full. / Four of a Kind and Full House.
             if (cardsHand[1].rank === cardsHand[3].rank) { 
-                sameResult.points = 800;
+                sameResult.points = 8;
                 (cardsHand[0].rank === cardsHand[1].rank) ? sameResult.card1 = cardsHand[0].rank : sameResult.card1 = cardsHand[1].rank;
             }
             else { 
-                sameResult.points = 700;
+                sameResult.points = 7;
                 if (cardsHand[0].rank === cardsHand[2].rank) {
                     sameResult.card1 = cardsHand[0].rank; 
                     sameResult.card2 = cardsHand[3].rank;
@@ -88,12 +110,12 @@ function isSame(cardsHand) {
             break;
         case 2: // Tris e Doppia Coppia. / Three of a Kind and Two Pair.
             if ( (differentRank[0] === 2 && differentRank[1] === 3) || (differentRank[0] === 0 && differentRank[1] === 3) || (differentRank[0] === 0 && differentRank[1] === 1) ) {
-                sameResult.points = 300;
+                sameResult.points = 3;
                 if (cardsHand[0].rank === cardsHand[2].rank ) { sameResult.card1 = cardsHand[0].rank; }
                 else { (cardsHand[1].rank === cardsHand[3].rank) ? sameResult.card1 = cardsHand[1].rank : sameResult.card1 = cardsHand[2].rank; }
             }
             else { 
-                sameResult.points = 200;
+                sameResult.points = 2;
                 if (cardsHand[0].rank === cardsHand[1].rank) {
                     sameRusult.card2 = cardsHand[0].rank;
                     (cardsHand[2].rank === cardsHand[3].rank) ? sameResult.card1 = cardsHand[2].rank : sameResult.card1 = cardsHand[3].rank;
@@ -105,7 +127,7 @@ function isSame(cardsHand) {
             }
             break;
         case 1: // Coppia. / Pair.
-            sameResult.points = 100;
+            sameResult.points = 1;
             for (i=0; i<=3; i++) {
                 if (differentRank[i] !== i) {
                     sameResult.card1 = cardsHand[i].rank;
@@ -139,20 +161,20 @@ function finalScore(cardsHand) {
     let straight = isStraight(cardsHand);
     let rankSum = isSum(cardsHand);
     if (flush && straight) { 
-        cardsHand[3].rank === 13 ? scoreFinal.points = 1000 : scoreFinal.points = 900;
+        cardsHand[3].rank === 13 ? scoreFinal.points = 10 : scoreFinal.points = 9;
         scoreFinal.card1 = cardsHand[3].rank;
         scoreFinal.card2 = cardsHand[0].rank;
         scoreFinal.suit = cardsHand[4].suit;
         return scoreFinal; 
     };
     if (straight) { 
-        cardsHand[3].rank === 13 ? scoreFinal.points = 500 : scoreFinal.points = 400;
+        cardsHand[3].rank === 13 ? scoreFinal.points = 5 : scoreFinal.points = 4;
         scoreFinal.card1 = cardsHand[3].rank;
         scoreFinal.card2 = cardsHand[0].rank;
         return scoreFinal;
     };
     if (flush) { 
-        scoreFinal.points = 600;
+        scoreFinal.points = 6;
         return scoreFinal;
     };
     scoreFinal = isSame(cardsHand);
@@ -169,7 +191,8 @@ function show(nowISeeYou) {
 }
 
 playDeck = createDeck();
-playerHand = createHand2();
-
-show(playerHand);
-console.log(finalScore(playerHand));
+createPlay(4);
+console.log(allPlayersHands[0]);
+console.log(allPlayersHands[1]);
+console.log(allPlayersHands[2]);
+console.log(allPlayersHands[3]);
