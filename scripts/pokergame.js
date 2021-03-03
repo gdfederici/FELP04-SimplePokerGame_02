@@ -2,7 +2,7 @@
 var playDeck = [];
 var playerHand = [];
 var allPlayersHands = [];
-var players = 4;
+var howManyPlayers = 4;
 var score = ["High card",
             "Pair",
             "Two Pair",
@@ -21,40 +21,38 @@ var score = ["High card",
 // Cuori/Hearts = 4, Quadri/Diamonds = 3, Fiori/Clubs = 2, Picche/Spades = 1 
 function createDeck() {
     let deck = []; 
-    for (j=1; j<=4; j++) {
-        for (i=2; i<=14; i++) {
+    for (let j=1; j<=4; j++) {
+        for (let i=2; i<=14; i++) {
             deck.push({"rank" : i, "suit" : j});        
         }
     }
     return deck;
 }
 
+// IT- Creo le mani per tutti i giocatori.
+// EN- Create hands for all players.
+function createPlay(players) {
+    for (let i=0; i<players; i++) {
+        allPlayersHands.push(createHand());
+    };
+    return allPlayersHands;
+}
+
 // IT- Creo la mano del giocatore.
 // EN- Create player's hand.
 function createHand() {
     let hand = [];
-    for (i=0; i<5; i++) { 
+    for (let i=0; i<5; i++) { 
         let luck = Math.floor(Math.random() * playDeck.length); // Numero casuale che individua una carta all'interno del mazzo. / Random number that identifies a card in the deck.
         hand = hand.concat(playDeck.splice(luck,1)); // Inserire la carta casuale nella mano dal giocatore e al contempo eliminarla dal mazzo. / Insert the random card into the player's hand and remove it from the deck at the same time.
     }
     hand.sort(function (a, b) { return a.rank - b.rank; }); // Ordinare la mano del giocatore. / Order the player's hand.
     return hand;
 }
-function createHand2() {
+/*function testHand() {
     let hand = [ {'rank' : 10, 'suit' : 2}, {'rank' : 11, 'suit' : 2}, {'rank' : 12, 'suit' : 2}, {'rank' : 13, 'suit' : 2}, {'rank' : 14, 'suit' : 2},];
     return hand;
-}
-
-function createPlay() {
-    /*allPlayersHands.push(createHand());
-    allPlayersHands.push(createHand());
-    allPlayersHands.push(createHand());
-    allPlayersHands.push(createHand());*/
-    for (i=0; i<4; i++) {
-        allPlayersHands.push(createHand());
-    };
-    return allPlayersHands;
-}
+}*/
 
 // IT- Controllo colore.
 // EN- Check for flush.
@@ -67,11 +65,11 @@ function isFlush(cardsHand) {
 function isStraight(cardsHand) {
     let checkStraight = true;
     if (cardsHand[0].rank !== 2 && cardsHand[4].rank !== 14) {
-        for (i=0; i<4; i++) {
+        for (let i=0; i<4; i++) {
             if (cardsHand[i].rank+1 !== cardsHand[i+1].rank) { checkStraight = false; break; }
         }
     } else {
-        for (i=0; i<3; i++) {
+        for (let i=0; i<3; i++) {
             if (cardsHand[i].rank+1 !== cardsHand[i+1].rank) { checkStraight = false; break; }
         }
     }
@@ -84,7 +82,7 @@ function isSame(cardsHand) {
     let sameRank = 0;
     let differentRank = [];
     let sameResult = {'points' : 0, 'card1' : 0, 'card2' : 0, 'suit' : 0,};
-    for (i=0; i<cardsHand.length-1; i++) {
+    for (let i=0; i<cardsHand.length-1; i++) {
         if (cardsHand[i].rank == cardsHand[i+1].rank) { sameRank++; }
         else { differentRank = differentRank.concat(i); }
     }
@@ -182,6 +180,8 @@ function finalScore(cardsHand) {
 }
 
 
+
+
 // IT- Mostro il contenuto, per controllo.
 // EN- Show for check.
 function show(nowISeeYou) {
@@ -191,8 +191,9 @@ function show(nowISeeYou) {
 }
 
 playDeck = createDeck();
-createPlay(4);
+createPlay(howManyPlayers);
 console.log(allPlayersHands[0]);
 console.log(allPlayersHands[1]);
 console.log(allPlayersHands[2]);
 console.log(allPlayersHands[3]);
+console.log(finalScore(allPlayersHands[0]));
