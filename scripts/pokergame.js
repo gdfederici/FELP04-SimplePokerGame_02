@@ -84,6 +84,14 @@ function isSame(cardsHand) {
     return points;
 }
 
+// IT- Calcolo valore carte del giocatore.
+// EN- Computing player's card value.
+function isSum(cardsHand) {
+    let valueCards = cardsHand.map(a => a.rank);
+    var sum = valueCards.reduce( (total, value) => total + value);
+    console.log(sum);
+}
+
 
 // IT- Mostro il contenuto, per controllo.
 // EN- Show for check.
@@ -97,3 +105,4 @@ playDeck = createDeck();
 playerHand = createHand();
 
 show(playerHand);
+isSum(playerHand);
