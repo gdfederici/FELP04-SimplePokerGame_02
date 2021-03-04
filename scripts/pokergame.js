@@ -14,6 +14,7 @@ var score = ["High card",
             "Four of a Kind",
             "Straight Flush",
             "Royal Flush" ];
+var playerWinner = 0;
 
 
 // IT- Inizializzo il mazzo inserendo le carte da Asso a Re con 4 cicli, uno per ogni seme.
@@ -32,8 +33,8 @@ function createDeck() {
 
 // IT- Creo le mani per tutti i giocatori.
 // EN- Create hands for all players.
-function createPlay(players) {
-    for (let i=0; i<players; i++) {
+function createPlay(numPlayers) {
+    for (let i=0; i<numPlayers; i++) {
         allPlayersHands.push(createHand());
     };
     return allPlayersHands;
@@ -61,11 +62,12 @@ function isWinner(players, allPlayers) {
         scorePlayers.push(finalScore(allPlayers[i]));
         scorePlayers[i].player = i;
     }
+    allPlayersScore = scorePlayers.map(x => x); // Copia i risultati nella variabile globale (che non viene ordinata). / Copy results with no order.
     scorePlayers.sort(function (a, b) { return b.points - a.points; }); // Ordinare i risultati. / Order results.
     console.log("risultati");
     console.log(scorePlayers);
     if (scorePlayers[0].points !== scorePlayers[1].points) {
-        winner = "player" + scorePlayers[0].player;
+        winner = scorePlayers[0].player;
     }
     else { winner = isDraw(players, scorePlayers); }
     return winner;
@@ -78,7 +80,7 @@ function isDraw(numPlayers, scoreDraw) {
     let tieScore2 = [];
     let tie = 0;
     let winnerDraw = "";
-    while ( ( tie+1 < 4) && (scoreDraw[tie].points === scoreDraw[tie+1].points) ) {
+    while ( ( tie+1 < numPlayers) && (scoreDraw[tie].points === scoreDraw[tie+1].points) ) {
         tie++;
     }
     tieScore = scoreDraw.slice(0, tie+1);
@@ -89,24 +91,24 @@ function isDraw(numPlayers, scoreDraw) {
         case 6: // Pareggio con colore -> controllo seme. / Draw with flush -> check suit.
         case 0: // Pareggio con carta più alta -> controllo seme. / Draw with high card -> check suit. 
             tieScore.sort(function (a, b) {return b.suit - a.suit; });
-            winnerDraw = "player" + tieScore[0].player;
+            winnerDraw = tieScore[0].player;
             break;
         case 9: // Pareggio con scala colore -> controllo valore scala. / Draw with straight flush -> check first card's rank.
         case 4: // Pareggio con scala -> controllo valore scala. / Draw with straight -> check first card's rank.
             tieScore.sort(function (a, b) {return b.card2 - a.card2; });
-            winnerDraw = "player" + tieScore[0].player;
+            winnerDraw = tieScore[0].player;
             break;
         case 8: // Pareggio con poker -> controllo valore carte poker. / Draw with four of a kind -> check four of a kind cards' rank.
         case 7: // Pareggio con full -> controllo valore carte tris. / Draw with full house -> check three of a kind cards' rank.
         case 3: // Pareggio con tris -> controllo valore carte tris. / Draw with three of a kind -> check three of a kind cards' rank.
         case 1: // Pareggio con coppia -> controllo valore carte coppia. / Draw with pair -> check pair cards' rank.
             tieScore.sort(function (a, b) {return b.card1 - a.card1; });
-            winnerDraw = "player" + tieScore[0].player;
+            winnerDraw = tieScore[0].player;
             break;
         case 2: // Pareggio con doppia coppia -> controllo valore carte delle due coppie. / Draw with double pair -> check double pair cards' rank.
             tieScore.sort(function (a, b) {return b.card1 - a.card1; });
             if (tieScore[0].points !== tieScore[1].points) {
-                winnerDraw = "player" + tieScore[0].player;
+                winnerDraw = tieScore[0].player;
                 break;
             }
             else { // Quando la prima coppia ha stesso valore -> controllo seconda coppia. / Draw with first pair -> check second pair cards' rank.
@@ -114,7 +116,7 @@ function isDraw(numPlayers, scoreDraw) {
                 console.log("spareggio doppie coppie");
                 console.log(tieScore2);
                 tieScore2.sort(function (a, b) {return b.card2 - a.card2; });
-                winnerDraw = "player" + tieScore2[0].player;
+                winnerDraw = tieScore2[0].player;
                 break;
             }
     }
@@ -238,16 +240,173 @@ function isSame(cardsHand) {
 }
 
 
-// IT- Mostro il contenuto, per controllo.
-// EN- Show for check.
-function show(nowISeeYou) {
-    document.getElementById("simplepokergame").innerHTML = nowISeeYou.map(function(item) {
-        return item.rank + "-" + item.suit
-    }).join("<br />");
+// IT- Mostro la mano del giocatore e il suo punteggio.
+// EN- Show player's card and its score.
+function showPlayers(players, playerHands) {
+    let showCards = "";
+    for (let i=0; i<players; i++) {
+        showCards += "<div id='player'>"
+        showCards += "<div id='player" + i + "'></div>"
+        showCards += "<h3>Player " + (i+1) + "</h3>";
+        showCards += "<div id='player_hand'>" + showHand(playerHands[i]) + "</div>";
+        showCards += "<div class='player_score'>" + displayPoints(allPlayersScore[i]) + "</div>"
+        showCards += "</div>"
+    }
+    document.getElementById("simplepokergame").innerHTML = showCards;
+}
+
+// IT- Mostro la mano del giocatore.
+// EN- Show player's card.
+function showHand(playerHand) {
+    let cardValue = "";
+    messageStart = "<p class='hand_display'>";
+    for (let i=0; i<playerHand.length; i++) {
+        switch (playerHand[i].rank) {
+            case 13:
+                cardValue = "img/13";
+                break;
+            case 12:
+                cardValue = "img/12";
+                break;
+            case 11:
+                cardValue = "img/11";
+                break;
+            case 10:
+                cardValue = "img/10";
+                break;
+            case 9:
+                cardValue = "img/9";
+                break;
+            case 8:
+                cardValue = "img/8";
+                break;
+            case 7:
+                cardValue = "img/7";
+                break;
+            case 6:
+                cardValue = "img/6";
+                break;
+            case 5:
+                cardValue = "img/5";
+                break;
+            case 4:
+                cardValue = "img/4";
+                break;
+            case 3:
+                cardValue = "img/3";
+                break;
+            case 2:
+                cardValue = "img/2";
+                break;
+            case 14:
+                cardValue = "img/14";
+                break;
+        }
+        switch (playerHand[i].suit) {
+            case 4:
+                cardValue +="H.jpg";
+                break;
+            case 3:
+                cardValue +="D.jpg";
+                break;
+            case 2:
+                cardValue +="C.jpg";
+                break;
+            case 1:
+                cardValue +="S.jpg";
+                break;
+        }
+        messageStart += '<img src="' + cardValue + '" width="100" height="153" loading="lazy" alt="A card" />';
+        cardValue = "";
+    }
+    messageStart += "<br/>";
+    return messageStart;
+}
+
+// IT- Mostro il punteggio della mano del giocatore.
+// EN- Show player' score.
+function displayPoints (playerScore) {
+    var finalPoint = "<p class='hand_points'>";
+    switch (playerScore.points) {
+        case 10:  
+            finalPoint += "Royal Flush";
+            break;
+        case 9:  
+            finalPoint += "Straight Flush";
+            break;
+        case 8:  
+            finalPoint += "Four of a Kind";
+            break;
+        case 7:  
+            finalPoint += "Full House";
+            break;
+        case 6:  
+            finalPoint += "Flush";
+            break;
+        case 5:  
+            finalPoint += "Straight Ace";
+            break;
+        case 4:  
+            finalPoint += "Straight";
+            break;
+        case 3:  
+            finalPoint += "Three of a Kind";
+            break;
+        case 2:  
+            finalPoint += "Two Pair";
+            break;
+        case 1:  
+            finalPoint += "Pair";
+            break;
+        case 0:  
+            finalPoint += "High Card";
+            switch (playerScore.card1) {
+                case 14:
+                    finalPoint += " -> Ace";
+                    break;
+                case 13:
+                    finalPoint += " -> King";
+                    break;
+                case 12:
+                    finalPoint += " -> Queen";
+                    break;
+                case 11:
+                    finalPoint += " -> Jack";
+                    break;
+                case 10:
+                case 9:
+                case 8:
+                case 7:
+                case 6:
+                case 5:
+                case 4:
+                case 3:
+                case 2:
+                    finalPoint += " -> " + playerScore.card1;
+                    break;
+            }
+            break;
+        }
+    finalPoint += "</p>";
+    return finalPoint;
+}
+
+// IT- Mostro il vincitore.
+// EN- Show winner.
+function showWinner(nowISeeYou) {
+    document.getElementById("player"+nowISeeYou).innerHTML = "winner";
 }
 
 playDeck = createDeck();
 createPlay(howManyPlayers);
+
+console.log(allPlayersHands[0]);
+console.log(allPlayersHands[1]);
+console.log(allPlayersHands[2]);
+console.log(allPlayersHands[3]);
+playerWinner = isWinner(howManyPlayers, allPlayersHands);
+showPlayers(howManyPlayers, allPlayersHands);
+showWinner(playerWinner);
 
 /*function modeGod() {
     let hand = [
@@ -261,9 +420,3 @@ createPlay(howManyPlayers);
 allPlayersHands = modeGod();*/
 
 
-console.log(allPlayersHands[0]);
-console.log(allPlayersHands[1]);
-console.log(allPlayersHands[2]);
-console.log(allPlayersHands[3]);
-var giocate = isWinner(howManyPlayers, allPlayersHands);
-console.log(giocate);
