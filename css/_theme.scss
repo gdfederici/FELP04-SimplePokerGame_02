@@ -1,0 +1,45 @@
+/*** VARIABLES ***/
+$color-back: #218380;
+$color-text_white: #ffffff;
+$color-h: #ffbc42;
+
+/*** ------------------------- *** ------------------------- *** ------------------------- *** ------------------------- ***/
+
+/*** BASECAMP ***/
+body {
+    background-color: $color-back;
+    color:$color-text_white;
+}
+h1 {
+    color: $color-h;
+}
+h3 {
+    color: $color-text_white;
+}
+
+/*** MAIN ***/
+.player {
+    border: $color-text_white 2px solid;
+    border-radius: 10px;    
+}
+
+.hand_points {
+    background-color: $color-h;
+    border: $color-h 3px solid;
+    border-radius: 10px; 
+}
+
+.winner-special  {
+    background-color: $color-h;
+    border: $color-h 3px solid;
+    border-radius: 10px; 
+}
+.winner-special h3 {
+    color: $color-back; 
+}
+.winner-special .hand_points {
+    background-color: $color-text_white;
+    border: $color-text_white 3px solid;
+    border-radius: 10px; 
+    color: $color-back; 
+}

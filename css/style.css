@@ -1,0 +1,156 @@
+/*** FONTS ***/
+:root {
+  font-size: 62.5%;
+  /* px->rem in base 10 */
+}
+
+/* open-sans-regular - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local(""), url("../fonts/open-sans-v18-latin-regular.woff2") format("woff2"), url("../fonts/open-sans-v18-latin-regular.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* open-sans-600 - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local(""), url("../fonts/open-sans-v18-latin-600.woff2") format("woff2"), url("../fonts/open-sans-v18-latin-600.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* open-sans-800 - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: local(""), url("../fonts/open-sans-v18-latin-800.woff2") format("woff2"), url("../fonts/open-sans-v18-latin-800.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* open-sans-regular - latin */
+@font-face {
+  font-family: 'Poker Kings';
+  font-style: normal;
+  font-weight: 400;
+  src: local(""), url("../fonts/pokerkings-regular.ttf") format("truetype");
+}
+
+/*** VARIABLES ***/
+/*** ------------------------- *** ------------------------- *** ------------------------- *** ------------------------- ***/
+/*** BASECAMP ***/
+body {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+  text-align: center;
+}
+
+h1 {
+  font-family: "Poker Kings", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 5rem;
+  line-height: 7.5rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: 3.6rem;
+  line-height: 5rem;
+  text-align: center;
+}
+
+/*** MAIN ***/
+/*** VARIABLES ***/
+/*** ------------------------- *** ------------------------- *** ------------------------- *** ------------------------- ***/
+/*** BASECAMP ***/
+body {
+  background-color: #218380;
+  color: #ffffff;
+}
+
+h1 {
+  color: #ffbc42;
+}
+
+h3 {
+  color: #ffffff;
+}
+
+/*** MAIN ***/
+.player {
+  border: #ffffff 2px solid;
+  border-radius: 10px;
+}
+
+.hand_points {
+  background-color: #ffbc42;
+  border: #ffbc42 3px solid;
+  border-radius: 10px;
+}
+
+.winner-special {
+  background-color: #ffbc42;
+  border: #ffbc42 3px solid;
+  border-radius: 10px;
+}
+
+.winner-special h3 {
+  color: #218380;
+}
+
+.winner-special .hand_points {
+  background-color: #ffffff;
+  border: #ffffff 3px solid;
+  border-radius: 10px;
+  color: #218380;
+}
+
+/*** ------------------------- *** ------------------------- *** ------------------------- *** ------------------------- ***/
+/*** BASECAMP ***/
+main {
+  width: 80%;
+  margin: 0 auto 50px auto;
+}
+
+h1 {
+  padding: 50px 0 35px 0;
+}
+
+h3 {
+  margin: 2rem auto 1rem auto;
+}
+
+/*** MAIN ***/
+.player {
+  margin: 35px auto;
+}
+
+.player_hand {
+  margin-bottom: 20px;
+}
+
+.player_score {
+  margin: 10px auto 20px auto;
+}
+
+.hand_points {
+  margin: auto;
+  padding: 10px;
+  width: 30%;
+}
+
+.winner-special h3 {
+  background: url("../img/winner.png") no-repeat center;
+  margin-top: 0;
+  padding-top: 75px;
+}
+/*# sourceMappingURL=style.css.map */

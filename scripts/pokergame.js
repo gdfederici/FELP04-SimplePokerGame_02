@@ -245,8 +245,8 @@ function isSame(cardsHand) {
 function showPlayers(players, playerHands) {
     let showCards = "";
     for (let i=0; i<players; i++) {
-        showCards += "<div id='player'>"
-        showCards += "<div id='player" + i + "'></div>"
+        //showCards += "<div class='player'>"
+        showCards += "<div id='player" + i + "' class='player'>"
         showCards += "<h3>Player " + (i+1) + "</h3>";
         showCards += "<div id='player_hand'>" + showHand(playerHands[i]) + "</div>";
         showCards += "<div class='player_score'>" + displayPoints(allPlayersScore[i]) + "</div>"
@@ -394,7 +394,8 @@ function displayPoints (playerScore) {
 // IT- Mostro il vincitore.
 // EN- Show winner.
 function showWinner(nowISeeYou) {
-    document.getElementById("player"+nowISeeYou).innerHTML = "winner";
+    //document.getElementById("player"+nowISeeYou).innerHTML = "winner";
+    document.getElementById("player"+nowISeeYou).classList.add("winner-special");
 }
 
 playDeck = createDeck();

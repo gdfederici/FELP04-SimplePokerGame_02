@@ -1,0 +1,88 @@
+/*** FONTS ***/
+:root {
+    font-size: 62.5%; /* px->rem in base 10 */
+}
+
+/* open-sans-regular - latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+        url('../fonts/open-sans-v18-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('../fonts/open-sans-v18-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* open-sans-600 - latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local(''),
+        url('../fonts/open-sans-v18-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('../fonts/open-sans-v18-latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* open-sans-800 - latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 800;
+    src: local(''),
+        url('../fonts/open-sans-v18-latin-800.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('../fonts/open-sans-v18-latin-800.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* open-sans-regular - latin */
+@font-face {
+    font-family: 'Poker Kings';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+        url('../fonts/pokerkings-regular.ttf') format('truetype');
+}
+
+/*** VARIABLES ***/
+$font-h: 'Poker Kings', Arial, Helvetica, sans-serif;
+$font-text: 'Open Sans', Arial, Helvetica, sans-serif;
+$font_normal: 400;
+$font-semibold: 600;
+$font_bold: 800;
+$font-size_normal: 2.4rem;
+$font-size_h1: 5.0rem;
+$font-size_h3: 3.6rem;
+$line-height_normal: 3.6rem;
+$line-height_h1: 7.5rem;
+$line-height_h3: 5rem;
+
+/*** ------------------------- *** ------------------------- *** ------------------------- *** ------------------------- ***/
+
+/*** BASECAMP ***/
+body {
+    font: {
+        family: $font-text;
+        weight: $font_semibold;
+        size: $font-size_normal;
+    }
+    line-height: $line-height_normal;
+    text-align: center;
+}
+h1 {
+    font: {
+        family: $font-h;
+        weight: $font_normal;
+        size: $font-size_h1;
+    }
+    line-height: $line-height_h1;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+}
+h3 {
+    font: {
+        family:$font-text;
+        weight: $font_bold;
+        size: $font-size_h3;
+    }
+    line-height: $line-height_h3;
+    text-align: center;
+}
+
+/*** MAIN ***/
