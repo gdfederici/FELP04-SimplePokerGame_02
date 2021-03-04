@@ -71,14 +71,14 @@ function isWinner(players, allPlayers) {
     return winner;
 }
 
-// IT- Calcolo del vincitore in caso stessa mano.
+// IT- Calcolo del vincitore in caso di stessa mano.
 // EN- Computing winner in the same hand event.
 function isDraw(numPlayers, scoreDraw) {
     let tieScore = [];
     let tieScore2 = [];
     let tie = 0;
     let winnerDraw = "";
-    while (scoreDraw[tie].points === scoreDraw[tie+1].points && tie<numPlayers) {
+    while ( ( tie+1 < 4) && (scoreDraw[tie].points === scoreDraw[tie+1].points) ) {
         tie++;
     }
     tieScore = scoreDraw.slice(0, tie+1);
@@ -209,7 +209,7 @@ function isSame(cardsHand) {
             else { 
                 sameResult.points = 2;
                 if (cardsHand[0].rank === cardsHand[1].rank) { // Valore della doppia coppia. / Rank of double pair.
-                    sameRusult.card2 = cardsHand[0].rank;
+                    sameResult.card2 = cardsHand[0].rank;
                     (cardsHand[2].rank === cardsHand[3].rank) ? sameResult.card1 = cardsHand[2].rank : sameResult.card1 = cardsHand[3].rank;
                 }
                 else {
@@ -247,18 +247,18 @@ function show(nowISeeYou) {
 }
 
 playDeck = createDeck();
-//createPlay(howManyPlayers);
+createPlay(howManyPlayers);
 
-function modeGod() {
+/*function modeGod() {
     let hand = [
-        [ {'rank' : 2, 'suit' : 1}, {'rank' : 5, 'suit' : 1}, {'rank' : 5, 'suit' : 2}, {'rank' : 9, 'suit' : 1}, {'rank' : 9, 'suit' : 2},],
-        [ {'rank' : 2, 'suit' : 2}, {'rank' : 7, 'suit' : 1}, {'rank' : 7, 'suit' : 3}, {'rank' : 9, 'suit' : 3}, {'rank' : 9, 'suit' : 4},],
-        [ {'rank' : 2, 'suit' : 3}, {'rank' : 4, 'suit' : 3}, {'rank' : 6, 'suit' : 3}, {'rank' : 8, 'suit' : 3}, {'rank' : 10, 'suit' : 1},],
-        [ {'rank' : 2, 'suit' : 4}, {'rank' : 4, 'suit' : 4}, {'rank' : 6, 'suit' : 4}, {'rank' : 8, 'suit' : 4}, {'rank' : 10, 'suit' : 2},],
+        [ {'rank' : 2, 'suit' : 2}, {'rank' : 3, 'suit' : 4}, {'rank' : 4, 'suit' : 1}, {'rank' : 10, 'suit' : 3}, {'rank' : 11, 'suit' : 1},],
+        [ {'rank' : 4, 'suit' : 3}, {'rank' : 6, 'suit' : 4}, {'rank' : 9, 'suit' : 1}, {'rank' : 11, 'suit' : 4}, {'rank' : 13, 'suit' : 4},],
+        [ {'rank' : 4, 'suit' : 2}, {'rank' : 7, 'suit' : 1}, {'rank' : 8, 'suit' : 1}, {'rank' : 12, 'suit' : 2}, {'rank' : 13, 'suit' : 1},],
+        [ {'rank' : 3, 'suit' : 1}, {'rank' : 5, 'suit' : 4}, {'rank' : 6, 'suit' : 3}, {'rank' : 9, 'suit' : 3}, {'rank' : 14, 'suit' : 3},],
     ];
     return hand;
 }
-allPlayersHands = modeGod();
+allPlayersHands = modeGod();*/
 
 
 console.log(allPlayersHands[0]);
