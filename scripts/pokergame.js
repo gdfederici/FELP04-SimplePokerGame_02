@@ -2,6 +2,7 @@ var playDeck = [];
 var allPlayersHands = [];
 var allPlayersScore = [];
 var howManyPlayers = 0;
+var playerWinner = 0;
 var score = ["High card",
             "Pair",
             "Two Pair",
@@ -13,7 +14,6 @@ var score = ["High card",
             "Four of a Kind",
             "Straight Flush",
             "Royal Flush" ];
-var playerWinner = 0;
 
 
 // IT- Il gioco.
@@ -30,6 +30,7 @@ function pokerGame(players) {
     document.getElementById("restart").classList.remove("get-out");
     document.getElementById("restart").classList.add("get-in");
 }
+
 
 
 // IT- Inizializzo il mazzo inserendo le carte da Asso a Re con 4 cicli, uno per ogni seme.
@@ -66,6 +67,7 @@ function createHand() {
     hand.sort(function (a, b) { return a.rank - b.rank; }); // Ordinare la mano del giocatore. / Order the player's hand.
     return hand;
 }
+
 
 
 // IT- Calcolo del vincitore.
@@ -255,6 +257,7 @@ function isSame(cardsHand) {
 }
 
 
+
 // IT- Mostro la mano del giocatore e il suo punteggio.
 // EN- Show player's card and its score.
 function showPlayers(players, playerHands) {
@@ -414,21 +417,7 @@ function showWinner(nowISeeYou) {
 }
 
 
+
 function restart() {
     window.location.reload();
 }
-
-
-
-/*function modeGod() {
-    let hand = [
-        [ {'rank' : 2, 'suit' : 2}, {'rank' : 3, 'suit' : 4}, {'rank' : 4, 'suit' : 1}, {'rank' : 10, 'suit' : 3}, {'rank' : 11, 'suit' : 1},],
-        [ {'rank' : 4, 'suit' : 3}, {'rank' : 6, 'suit' : 4}, {'rank' : 9, 'suit' : 1}, {'rank' : 11, 'suit' : 4}, {'rank' : 13, 'suit' : 4},],
-        [ {'rank' : 4, 'suit' : 2}, {'rank' : 7, 'suit' : 1}, {'rank' : 8, 'suit' : 1}, {'rank' : 12, 'suit' : 2}, {'rank' : 13, 'suit' : 1},],
-        [ {'rank' : 3, 'suit' : 1}, {'rank' : 5, 'suit' : 4}, {'rank' : 6, 'suit' : 3}, {'rank' : 9, 'suit' : 3}, {'rank' : 14, 'suit' : 3},],
-    ];
-    return hand;
-}
-allPlayersHands = modeGod();*/
-
-
