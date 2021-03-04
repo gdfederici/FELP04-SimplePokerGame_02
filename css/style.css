@@ -69,6 +69,15 @@ h3 {
 }
 
 /*** MAIN ***/
+#restart_button {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: 2.4rem;
+  line-height: 7.5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 /*** VARIABLES ***/
 /*** ------------------------- *** ------------------------- *** ------------------------- *** ------------------------- ***/
 /*** BASECAMP ***/
@@ -114,6 +123,20 @@ h3 {
   color: #218380;
 }
 
+#restart_button {
+  background-color: #ffffff;
+  border: #ffffff 3px solid;
+  border-radius: 10px;
+  color: #218380;
+}
+
+#restart_button:hover {
+  background-color: #f00;
+  border: #f00 3px solid;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
 /*** ------------------------- *** ------------------------- *** ------------------------- *** ------------------------- ***/
 /*** BASECAMP ***/
 main {
@@ -152,5 +175,10 @@ h3 {
   background: url("../img/winner.png") no-repeat center;
   margin-top: 0;
   padding-top: 75px;
+}
+
+#restart_button {
+  width: 50%;
+  margin: 50px auto;
 }
 /*# sourceMappingURL=style.css.map */

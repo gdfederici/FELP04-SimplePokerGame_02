@@ -86,3 +86,13 @@ h3 {
 }
 
 /*** MAIN ***/
+#restart_button {
+    font: {
+        family: $font-text;
+        weight: $font_bold;
+        size: $font-size_normal;
+    }
+    line-height: $line-height_h1;
+    text-align: center;
+    text-transform: uppercase;
+}

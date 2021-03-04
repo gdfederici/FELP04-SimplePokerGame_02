@@ -1,4 +1,3 @@
-
 var playDeck = [];
 var allPlayersHands = [];
 var allPlayersScore = [];
@@ -15,6 +14,16 @@ var score = ["High card",
             "Straight Flush",
             "Royal Flush" ];
 var playerWinner = 0;
+
+// IT- Il gioco.
+// EN- The game.
+function pokerGame() {
+    playDeck = createDeck();
+    createPlay(howManyPlayers);
+    playerWinner = isWinner(howManyPlayers, allPlayersHands);
+    showPlayers(howManyPlayers, allPlayersHands);
+    showWinner(playerWinner);
+}
 
 
 // IT- Inizializzo il mazzo inserendo le carte da Asso a Re con 4 cicli, uno per ogni seme.
@@ -84,7 +93,7 @@ function isDraw(numPlayers, scoreDraw) {
         tie++;
     }
     tieScore = scoreDraw.slice(0, tie+1);
-    console.log("pareggio");
+    console.log("spareggio");
     console.log(tieScore);
     switch (tieScore[0].points) {
         case 10: // Pareggio con scala reale -> controllo seme. / Draw with royal flush -> check suit.
@@ -398,17 +407,13 @@ function showWinner(nowISeeYou) {
     document.getElementById("player"+nowISeeYou).classList.add("winner-special");
 }
 
-playDeck = createDeck();
-createPlay(howManyPlayers);
 
-console.log(allPlayersHands[0]);
-console.log(allPlayersHands[1]);
-console.log(allPlayersHands[2]);
-console.log(allPlayersHands[3]);
-playerWinner = isWinner(howManyPlayers, allPlayersHands);
-showPlayers(howManyPlayers, allPlayersHands);
-showWinner(playerWinner);
+function restart() {
+    window.location.reload();
+}
 
+
+pokerGame();
 /*function modeGod() {
     let hand = [
         [ {'rank' : 2, 'suit' : 2}, {'rank' : 3, 'suit' : 4}, {'rank' : 4, 'suit' : 1}, {'rank' : 10, 'suit' : 3}, {'rank' : 11, 'suit' : 1},],

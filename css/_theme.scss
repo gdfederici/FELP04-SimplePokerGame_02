@@ -43,3 +43,15 @@ h3 {
     border-radius: 10px; 
     color: $color-back; 
 }
+
+#restart_button {
+    background-color: $color-text_white;
+    border: $color-text_white 3px solid;
+    border-radius: 10px; 
+    color: $color-back; 
+}#restart_button:hover {
+    background-color: #f00;
+    border: #f00 3px solid;
+    border-radius: 10px; 
+    color: $color-text_white; 
+}
