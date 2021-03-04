@@ -18,6 +18,20 @@ h3 {
 }
 
 /*** MAIN ***/
+.choose-players button {
+    background-color: $color-text_white;
+    border: $color-text_white 3px solid;
+    border-radius: 10px; 
+    color: $color-back; 
+}
+.choose-players button:hover, .choose-players button:focus {
+    background-color: $color-h;
+    border: $color-h 3px solid;
+    border-radius: 10px; 
+    color: $color-text_white;
+    outline: none;
+}
+
 .player {
     border: $color-text_white 2px solid;
     border-radius: 10px;    
@@ -49,7 +63,8 @@ h3 {
     border: $color-text_white 3px solid;
     border-radius: 10px; 
     color: $color-back; 
-}#restart_button:hover {
+}
+#restart_button:hover {
     background-color: #f00;
     border: #f00 3px solid;
     border-radius: 10px; 

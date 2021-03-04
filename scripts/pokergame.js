@@ -1,7 +1,7 @@
 var playDeck = [];
 var allPlayersHands = [];
 var allPlayersScore = [];
-var howManyPlayers = 4;
+var howManyPlayers = 0;
 var score = ["High card",
             "Pair",
             "Two Pair",
@@ -15,9 +15,11 @@ var score = ["High card",
             "Royal Flush" ];
 var playerWinner = 0;
 
+
 // IT- Il gioco.
 // EN- The game.
-function pokerGame() {
+function pokerGame(players) {
+    howManyPlayers = players;
     playDeck = createDeck();
     createPlay(howManyPlayers);
     playerWinner = isWinner(howManyPlayers, allPlayersHands);
@@ -66,7 +68,7 @@ function createHand() {
 // EN- Computing winner.
 function isWinner(players, allPlayers) {
     let scorePlayers = [];
-    let winner ="";
+    let winner = 0;
     for (let i=0; i<players; i++) {
         scorePlayers.push(finalScore(allPlayers[i]));
         scorePlayers[i].player = i;
@@ -413,7 +415,7 @@ function restart() {
 }
 
 
-pokerGame();
+
 /*function modeGod() {
     let hand = [
         [ {'rank' : 2, 'suit' : 2}, {'rank' : 3, 'suit' : 4}, {'rank' : 4, 'suit' : 1}, {'rank' : 10, 'suit' : 3}, {'rank' : 11, 'suit' : 1},],
