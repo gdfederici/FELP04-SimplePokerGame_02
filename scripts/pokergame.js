@@ -1,7 +1,7 @@
 
 var playDeck = [];
-var playerHand = [];
 var allPlayersHands = [];
+var allPlayersScore = [];
 var howManyPlayers = 4;
 var score = ["High card",
             "Pair",
@@ -179,6 +179,64 @@ function finalScore(cardsHand) {
     return scoreFinal;
 }
 
+// IT- Calcolo del vincitore.
+// EN- Computing winner.
+function isWinner(players, allPlayers) {
+    let scorePlayers = [];
+    let tieScore = [];
+    let tieScore2 = [];
+    let tie = 0;
+    let winner ="";
+    for (let i=0; i<players; i++) {
+        scorePlayers.push(finalScore(allPlayers[i]));
+        scorePlayers[i].player = i;
+    }
+    scorePlayers.sort(function (a, b) { return b.points - a.points; }); // Ordinare i risultati. / Order results.
+    console.log("risultati");
+    console.log(scorePlayers);
+    if (scorePlayers[tie].points !== scorePlayers[tie+1]) {
+        winner = "player" + scorePlayers[tie].player;
+    }
+    while (scorePlayers[tie].points === scorePlayers[tie+1].points && tie<players) {
+        tie++;
+    }
+    tieScore = scorePlayers.slice(0, tie+1);
+    console.log("pareggio");
+    console.log(tieScore);
+    switch (tieScore[0].points) {
+        case 10: // Pareggio con scala reale -> controllo seme. / Draw with royal flush -> check suit.
+        case 6: // Pareggio con colore -> controllo seme. / Draw with flush -> check suit.
+        case 0: // Pareggio con carta più alta -> controllo seme. / Draw with high card -> check suit. 
+            tieScore.sort(function (a, b) {return b.suit - a.suit; });
+            winner = "player" + tieScore[0].player;
+            break;
+        case 9: // Pareggio con scala colore -> controllo valore scala. / Draw with straight flush -> check first card's rank.
+        case 4: // Pareggio con scala -> controllo valore scala. / Draw with straight -> check first card's rank.
+            tieScore.sort(function (a, b) {return b.card2 - a.card2; });
+            winner = "player" + tieScore[0].player;
+            break;
+        case 8: // Pareggio con poker -> controllo valore carte poker. / Draw with four of a kind -> check four of a kind cards' rank.
+        case 7: // Pareggio con full -> controllo valore carte tris. / Draw with full house -> check three of a kind cards' rank.
+        case 3: // Pareggio con tris -> controllo valore carte tris. / Draw with three of a kind -> check three of a kind cards' rank.
+        case 1: // Pareggio con coppia -> controllo valore carte coppia. / Draw with pair -> check pair cards' rank.
+            tieScore.sort(function (a, b) {return b.card1 - a.card1; });
+            winner = "player" + tieScore[0].player;
+            break;
+        case 2: // Pareggio con doppia coppia -> controllo valore carte delle due coppie. / Draw with double pair -> check double pair cards' rank.
+            tieScore.sort(function (a, b) {return b.card1 - a.card1; });
+            if (tieScore[0].points !== scorePlayers[1]) {
+                winner = "player" + tieScore[0].player;
+                break;
+            }
+            else { // Quando la prima coppia ha stesso valore -> controllo seconda coppia. / Draw with first pair -> check second pair cards' rank.
+                tieScore2 = tieScore.slice(0, 1);
+                tieScore2.sort(function (a, b) {return b.card2 - a.card2; });
+                winner = "player" + tieScore2[0].player;
+                break;
+            }
+    }
+    return(winner); 
+}
 
 
 
@@ -196,4 +254,5 @@ console.log(allPlayersHands[0]);
 console.log(allPlayersHands[1]);
 console.log(allPlayersHands[2]);
 console.log(allPlayersHands[3]);
-console.log(finalScore(allPlayersHands[0]));
+var giocate = isWinner(howManyPlayers, allPlayersHands);
+console.log(giocate);
