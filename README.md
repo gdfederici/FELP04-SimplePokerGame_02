@@ -1,6 +1,6 @@
 # A Simple Poker Game 2.0
-**IT-** Un semplice esercizio per i primi utilizzi di JavaScript. Versione 2.0 (versione precedente https://github.com/gdfederici/JS_LP02-SimplePokerGame_01 ) <br/>
-**EN-** A simple poker game for my second time with JS. Version 2.0 (previous versione https://github.com/gdfederici/JS_LP02-SimplePokerGame_01 ) <br/>
+**IT-** Un semplice esercizio per i primi utilizzi di JavaScript. Versione 2.0. <br/>
+**EN-** A simple poker game for my second time with JS. Version 2.0. <br/>
 <br/>
 
 ## Descrizione / Description:
