@@ -49,10 +49,6 @@ function createHand() {
     hand.sort(function (a, b) { return a.rank - b.rank; }); // Ordinare la mano del giocatore. / Order the player's hand.
     return hand;
 }
-/*function testHand() {
-    let hand = [ {'rank' : 10, 'suit' : 2}, {'rank' : 11, 'suit' : 2}, {'rank' : 12, 'suit' : 2}, {'rank' : 13, 'suit' : 2}, {'rank' : 14, 'suit' : 2},];
-    return hand;
-}*/
 
 // IT- Controllo colore.
 // EN- Check for flush.
@@ -194,9 +190,10 @@ function isWinner(players, allPlayers) {
     scorePlayers.sort(function (a, b) { return b.points - a.points; }); // Ordinare i risultati. / Order results.
     console.log("risultati");
     console.log(scorePlayers);
-    if (scorePlayers[tie].points !== scorePlayers[tie+1]) {
-        winner = "player" + scorePlayers[tie].player;
+    if (scorePlayers[0].points !== scorePlayers[1].points) {
+        winner = "player" + scorePlayers[0].player;
     }
+    else {
     while (scorePlayers[tie].points === scorePlayers[tie+1].points && tie<players) {
         tie++;
     }
@@ -224,17 +221,19 @@ function isWinner(players, allPlayers) {
             break;
         case 2: // Pareggio con doppia coppia -> controllo valore carte delle due coppie. / Draw with double pair -> check double pair cards' rank.
             tieScore.sort(function (a, b) {return b.card1 - a.card1; });
-            if (tieScore[0].points !== scorePlayers[1]) {
+            if (tieScore[0].points !== tieScore[1].points) {
                 winner = "player" + tieScore[0].player;
                 break;
             }
             else { // Quando la prima coppia ha stesso valore -> controllo seconda coppia. / Draw with first pair -> check second pair cards' rank.
-                tieScore2 = tieScore.slice(0, 1);
+                tieScore2 = tieScore.slice(0);
+                console.log("spareggio doppie coppie");
+                console.log(tieScore2);
                 tieScore2.sort(function (a, b) {return b.card2 - a.card2; });
                 winner = "player" + tieScore2[0].player;
                 break;
             }
-    }
+    }}
     return(winner); 
 }
 
@@ -249,7 +248,20 @@ function show(nowISeeYou) {
 }
 
 playDeck = createDeck();
-createPlay(howManyPlayers);
+//createPlay(howManyPlayers);
+
+function modeGod() {
+    let hand = [
+        [ {'rank' : 2, 'suit' : 1}, {'rank' : 5, 'suit' : 1}, {'rank' : 5, 'suit' : 2}, {'rank' : 9, 'suit' : 1}, {'rank' : 9, 'suit' : 2},],
+        [ {'rank' : 2, 'suit' : 2}, {'rank' : 7, 'suit' : 1}, {'rank' : 7, 'suit' : 3}, {'rank' : 9, 'suit' : 3}, {'rank' : 9, 'suit' : 4},],
+        [ {'rank' : 2, 'suit' : 3}, {'rank' : 4, 'suit' : 3}, {'rank' : 6, 'suit' : 3}, {'rank' : 8, 'suit' : 3}, {'rank' : 10, 'suit' : 1},],
+        [ {'rank' : 2, 'suit' : 4}, {'rank' : 4, 'suit' : 4}, {'rank' : 6, 'suit' : 4}, {'rank' : 8, 'suit' : 4}, {'rank' : 10, 'suit' : 4},],
+    ];
+    return hand;
+}
+allPlayersHands = modeGod();
+
+
 console.log(allPlayersHands[0]);
 console.log(allPlayersHands[1]);
 console.log(allPlayersHands[2]);
