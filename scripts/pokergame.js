@@ -56,9 +56,6 @@ function createHand() {
 // EN- Computing winner.
 function isWinner(players, allPlayers) {
     let scorePlayers = [];
-    let tieScore = [];
-    let tieScore2 = [];
-    let tie = 0;
     let winner ="";
     for (let i=0; i<players; i++) {
         scorePlayers.push(finalScore(allPlayers[i]));
@@ -70,11 +67,21 @@ function isWinner(players, allPlayers) {
     if (scorePlayers[0].points !== scorePlayers[1].points) {
         winner = "player" + scorePlayers[0].player;
     }
-    else {
-    while (scorePlayers[tie].points === scorePlayers[tie+1].points && tie<players) {
+    else { winner = isDraw(players, scorePlayers); }
+    return winner;
+}
+
+// IT- Calcolo del vincitore in caso stessa mano.
+// EN- Computing winner in the same hand event.
+function isDraw(numPlayers, scoreDraw) {
+    let tieScore = [];
+    let tieScore2 = [];
+    let tie = 0;
+    let winnerDraw = "";
+    while (scoreDraw[tie].points === scoreDraw[tie+1].points && tie<numPlayers) {
         tie++;
     }
-    tieScore = scorePlayers.slice(0, tie+1);
+    tieScore = scoreDraw.slice(0, tie+1);
     console.log("pareggio");
     console.log(tieScore);
     switch (tieScore[0].points) {
@@ -82,24 +89,24 @@ function isWinner(players, allPlayers) {
         case 6: // Pareggio con colore -> controllo seme. / Draw with flush -> check suit.
         case 0: // Pareggio con carta più alta -> controllo seme. / Draw with high card -> check suit. 
             tieScore.sort(function (a, b) {return b.suit - a.suit; });
-            winner = "player" + tieScore[0].player;
+            winnerDraw = "player" + tieScore[0].player;
             break;
         case 9: // Pareggio con scala colore -> controllo valore scala. / Draw with straight flush -> check first card's rank.
         case 4: // Pareggio con scala -> controllo valore scala. / Draw with straight -> check first card's rank.
             tieScore.sort(function (a, b) {return b.card2 - a.card2; });
-            winner = "player" + tieScore[0].player;
+            winnerDraw = "player" + tieScore[0].player;
             break;
         case 8: // Pareggio con poker -> controllo valore carte poker. / Draw with four of a kind -> check four of a kind cards' rank.
         case 7: // Pareggio con full -> controllo valore carte tris. / Draw with full house -> check three of a kind cards' rank.
         case 3: // Pareggio con tris -> controllo valore carte tris. / Draw with three of a kind -> check three of a kind cards' rank.
         case 1: // Pareggio con coppia -> controllo valore carte coppia. / Draw with pair -> check pair cards' rank.
             tieScore.sort(function (a, b) {return b.card1 - a.card1; });
-            winner = "player" + tieScore[0].player;
+            winnerDraw = "player" + tieScore[0].player;
             break;
         case 2: // Pareggio con doppia coppia -> controllo valore carte delle due coppie. / Draw with double pair -> check double pair cards' rank.
             tieScore.sort(function (a, b) {return b.card1 - a.card1; });
             if (tieScore[0].points !== tieScore[1].points) {
-                winner = "player" + tieScore[0].player;
+                winnerDraw = "player" + tieScore[0].player;
                 break;
             }
             else { // Quando la prima coppia ha stesso valore -> controllo seconda coppia. / Draw with first pair -> check second pair cards' rank.
@@ -107,11 +114,11 @@ function isWinner(players, allPlayers) {
                 console.log("spareggio doppie coppie");
                 console.log(tieScore2);
                 tieScore2.sort(function (a, b) {return b.card2 - a.card2; });
-                winner = "player" + tieScore2[0].player;
+                winnerDraw = "player" + tieScore2[0].player;
                 break;
             }
-    }}
-    return(winner); 
+    }
+    return(winnerDraw); 
 }
 
 // IT- Calcolo valore mano.
@@ -120,7 +127,6 @@ function finalScore(cardsHand) {
     let scoreFinal = {'points' : 0, 'card1' : 0, 'card2' : 0, 'suit' : 0,};
     let flush = isFlush(cardsHand);
     let straight = isStraight(cardsHand);
-    let rankSum = isSum(cardsHand);
     if (flush && straight) { // Scala reale. / Royal flush.
         cardsHand[3].rank === 13 ? scoreFinal.points = 10 : scoreFinal.points = 9;
         scoreFinal.card1 = cardsHand[3].rank;
@@ -231,19 +237,6 @@ function isSame(cardsHand) {
     return sameResult;
 }
 
-// IT- Calcolo somma valore tutte carte del giocatore.
-// EN- Computing sum all player's card rank value.
-function isSum(cardsHand) {
-    let valueCards = cardsHand.map(a => a.rank);
-    var sum = valueCards.reduce( (total, value) => total + value);
-    return sum;
-}
-
-
-
-
-
-
 
 // IT- Mostro il contenuto, per controllo.
 // EN- Show for check.
@@ -261,7 +254,7 @@ function modeGod() {
         [ {'rank' : 2, 'suit' : 1}, {'rank' : 5, 'suit' : 1}, {'rank' : 5, 'suit' : 2}, {'rank' : 9, 'suit' : 1}, {'rank' : 9, 'suit' : 2},],
         [ {'rank' : 2, 'suit' : 2}, {'rank' : 7, 'suit' : 1}, {'rank' : 7, 'suit' : 3}, {'rank' : 9, 'suit' : 3}, {'rank' : 9, 'suit' : 4},],
         [ {'rank' : 2, 'suit' : 3}, {'rank' : 4, 'suit' : 3}, {'rank' : 6, 'suit' : 3}, {'rank' : 8, 'suit' : 3}, {'rank' : 10, 'suit' : 1},],
-        [ {'rank' : 2, 'suit' : 4}, {'rank' : 4, 'suit' : 4}, {'rank' : 6, 'suit' : 4}, {'rank' : 8, 'suit' : 4}, {'rank' : 10, 'suit' : 4},],
+        [ {'rank' : 2, 'suit' : 4}, {'rank' : 4, 'suit' : 4}, {'rank' : 6, 'suit' : 4}, {'rank' : 8, 'suit' : 4}, {'rank' : 10, 'suit' : 2},],
     ];
     return hand;
 }
