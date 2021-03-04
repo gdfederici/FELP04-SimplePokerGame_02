@@ -25,6 +25,10 @@ function pokerGame(players) {
     playerWinner = isWinner(howManyPlayers, allPlayersHands);
     showPlayers(howManyPlayers, allPlayersHands);
     showWinner(playerWinner);
+    document.getElementById("choose-players").classList.remove("get-in");
+    document.getElementById("choose-players").classList.add("get-out");
+    document.getElementById("restart").classList.remove("get-out");
+    document.getElementById("restart").classList.add("get-in");
 }
 
 

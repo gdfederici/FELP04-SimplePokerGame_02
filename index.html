@@ -28,18 +28,21 @@
     <main>
         <h1>A Simple Poker Game 2.0</h1>
         
-        <div class="choose-players">
+        <div id="choose-players" class="get-in">
             <h3>How many players?</h3>
             <button onclick="pokerGame(2)">2</button>
             <button onclick="pokerGame(3)">3</button>
             <button onclick="pokerGame(4)">4</button>
+        </div>
         
         <div id="simplepokergame"></div>
         
-        <div class="restart">
+        <div id="restart" class="get-out">
             <button id="restart_button" onclick="restart()">Restart</button>
         </div>
     </main>
 
     <script src="scripts/pokergame.js"></script>
-</body> 
+</body>
+
+</html>

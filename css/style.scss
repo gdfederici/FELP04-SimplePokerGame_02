@@ -27,8 +27,7 @@ h3 {
 }
 .hand_points {
     margin: auto;
-    padding: 10px;
-    width: 30%;
+    width: 500px;
 }
 
 .winner-special h3 {
@@ -40,4 +39,12 @@ h3 {
 #restart_button {
     width: 50%;
     margin: 50px auto; 
+}
+
+/*** JS ACTIONS ***/
+.get-in {
+    display: auto;
+}
+.get-out {
+    display: none;
 }

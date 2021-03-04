@@ -69,7 +69,7 @@ h3 {
 }
 
 /*** MAIN ***/
-.choose-players button {
+#choose-players button {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-weight: 800;
   font-size: 2.4rem;
@@ -104,14 +104,14 @@ h3 {
 }
 
 /*** MAIN ***/
-.choose-players button {
+#choose-players button {
   background-color: #ffffff;
   border: #ffffff 3px solid;
   border-radius: 10px;
   color: #218380;
 }
 
-.choose-players button:hover, .choose-players button:focus {
+#choose-players button:hover, .choose-players button:focus {
   background-color: #ffbc42;
   border: #ffbc42 3px solid;
   border-radius: 10px;
@@ -191,8 +191,7 @@ h3 {
 
 .hand_points {
   margin: auto;
-  padding: 10px;
-  width: 30%;
+  width: 500px;
 }
 
 .winner-special h3 {
@@ -204,5 +203,14 @@ h3 {
 #restart_button {
   width: 50%;
   margin: 50px auto;
+}
+
+/*** JS ACTIONS ***/
+.get-in {
+  display: auto;
+}
+
+.get-out {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */

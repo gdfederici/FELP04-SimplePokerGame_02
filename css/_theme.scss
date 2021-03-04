@@ -18,13 +18,13 @@ h3 {
 }
 
 /*** MAIN ***/
-.choose-players button {
+#choose-players button {
     background-color: $color-text_white;
     border: $color-text_white 3px solid;
     border-radius: 10px; 
     color: $color-back; 
 }
-.choose-players button:hover, .choose-players button:focus {
+#choose-players button:hover, .choose-players button:focus {
     background-color: $color-h;
     border: $color-h 3px solid;
     border-radius: 10px; 
