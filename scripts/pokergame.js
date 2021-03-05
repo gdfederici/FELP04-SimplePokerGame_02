@@ -16,6 +16,7 @@ var score = ["High card",
             "Royal Flush" ];
 
 
+// ------------------------- // ------------------------- // ------------------------- // ------------------------- //
 // IT- Il gioco.
 // EN- The game.
 function pokerGame(players) {
@@ -32,7 +33,7 @@ function pokerGame(players) {
 }
 
 
-
+// ------------------------- // ------------------------- // ------------------------- // ------------------------- //
 // IT- Inizializzo il mazzo inserendo le carte da Asso a Re con 4 cicli, uno per ogni seme.
 // EN- Create the deck by inserting cards A -> King with 4 cycles, one for each suit.
 // Asso/Ace = 14, Goobo/Jack = 11, Donna/Queen = 12, Re/King = 13
@@ -69,7 +70,7 @@ function createHand() {
 }
 
 
-
+// ------------------------- // ------------------------- // ------------------------- // ------------------------- //
 // IT- Calcolo del vincitore.
 // EN- Computing winner.
 function isWinner(players, allPlayers) {
@@ -257,7 +258,7 @@ function isSame(cardsHand) {
 }
 
 
-
+// ------------------------- // ------------------------- // ------------------------- // ------------------------- //
 // IT- Mostro la mano del giocatore e il suo punteggio.
 // EN- Show player's card and its score.
 function showPlayers(players, playerHands) {
@@ -417,7 +418,7 @@ function showWinner(nowISeeYou) {
 }
 
 
-
+// ------------------------- // ------------------------- // ------------------------- // ------------------------- //
 function restart() {
     window.location.reload();
 }
