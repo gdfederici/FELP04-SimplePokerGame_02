@@ -251,6 +251,7 @@ function isSame(cardsHand) {
         case 0: // Carta più alta. / High card.
             sameResult.points = 0;
             sameResult.card1 = cardsHand[4].rank; // Valore della carta più alta. / Rank of high card.
+            sameResult.suit = cardsHand[4].suit;
             break;
         default: // Errore. / Some go wrong.
             points = -10000;
