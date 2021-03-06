@@ -179,14 +179,8 @@ function isFlush(cardsHand) {
 // EN- Check for straight.
 function isStraight(cardsHand) {
     let checkStraight = true;
-    if (cardsHand[0].rank !== 2 && cardsHand[4].rank !== 14) {
-        for (let i=0; i<4; i++) {
-            if (cardsHand[i].rank+1 !== cardsHand[i+1].rank) { checkStraight = false; break; }
-        }
-    } else {
-        for (let i=0; i<3; i++) {
-            if (cardsHand[i].rank+1 !== cardsHand[i+1].rank) { checkStraight = false; break; }
-        }
+    for (let i=0; i<4; i++) {
+        if (cardsHand[i].rank+1 !== cardsHand[i+1].rank) { checkStraight = false; break; }
     }
     return checkStraight;
 }
