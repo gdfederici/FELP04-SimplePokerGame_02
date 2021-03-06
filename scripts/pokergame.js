@@ -126,7 +126,7 @@ function isDraw(numPlayers, scoreDraw) {
             break;
         case 2: // Pareggio con doppia coppia -> controllo valore carte delle due coppie. / Draw with double pair -> check double pair cards' rank.
             tieScore.sort(function (a, b) {return b.card1 - a.card1; });
-            if (tieScore[0].points !== tieScore[1].points) {
+            if (tieScore[0].card1 !== tieScore[1].card1) {
                 winnerDraw = tieScore[0].player;
                 break;
             }
