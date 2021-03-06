@@ -21,7 +21,7 @@ var score = ["High card",
 // EN- The game.
 function pokerGame(players) {
     howManyPlayers = players;
-    playDeck = createDeck();
+    playDeck = createDeck(players);
     createPlay(howManyPlayers);
     playerWinner = isWinner(howManyPlayers, allPlayersHands);
     showPlayers(howManyPlayers, allPlayersHands);
@@ -38,10 +38,11 @@ function pokerGame(players) {
 // EN- Create the deck by inserting cards A -> King with 4 cycles, one for each suit.
 // Asso/Ace = 14, Goobo/Jack = 11, Donna/Queen = 12, Re/King = 13
 // Cuori/Hearts = 4, Quadri/Diamonds = 3, Fiori/Clubs = 2, Picche/Spades = 1 
-function createDeck() {
-    let deck = []; 
+function createDeck(numberPlayers) {
+    let deck = [];
+    let howManyCards = 11-numberPlayers; // Nel poker la carta più bassa del mazzo è è pari a 11-il numero dei giocatori. / The lowest card in the deck is equal to 11-number of players.
     for (let j=1; j<=4; j++) {
-        for (let i=2; i<=14; i++) {
+        for (let i=howManyCards; i<=14; i++) {
             deck.push({"rank" : i, "suit" : j});        
         }
     }
@@ -280,47 +281,7 @@ function showHand(playerHand) {
     let cardValue = "";
     messageStart = "<p class='hand_display'>";
     for (let i=0; i<playerHand.length; i++) {
-        switch (playerHand[i].rank) {
-            case 13:
-                cardValue = "img/13";
-                break;
-            case 12:
-                cardValue = "img/12";
-                break;
-            case 11:
-                cardValue = "img/11";
-                break;
-            case 10:
-                cardValue = "img/10";
-                break;
-            case 9:
-                cardValue = "img/9";
-                break;
-            case 8:
-                cardValue = "img/8";
-                break;
-            case 7:
-                cardValue = "img/7";
-                break;
-            case 6:
-                cardValue = "img/6";
-                break;
-            case 5:
-                cardValue = "img/5";
-                break;
-            case 4:
-                cardValue = "img/4";
-                break;
-            case 3:
-                cardValue = "img/3";
-                break;
-            case 2:
-                cardValue = "img/2";
-                break;
-            case 14:
-                cardValue = "img/14";
-                break;
-        }
+        cardValue += "img/" + playerHand[i].rank;
         switch (playerHand[i].suit) {
             case 4:
                 cardValue +="H.jpg";
@@ -346,66 +307,26 @@ function showHand(playerHand) {
 // EN- Show player' score.
 function displayPoints (playerScore) {
     var finalPoint = "<p class='hand_points'>";
-    switch (playerScore.points) {
-        case 10:  
-            finalPoint += "Royal Flush";
-            break;
-        case 9:  
-            finalPoint += "Straight Flush";
-            break;
-        case 8:  
-            finalPoint += "Four of a Kind";
-            break;
-        case 7:  
-            finalPoint += "Full House";
-            break;
-        case 6:  
-            finalPoint += "Flush";
-            break;
-        case 5:  
-            finalPoint += "Straight Ace";
-            break;
-        case 4:  
-            finalPoint += "Straight";
-            break;
-        case 3:  
-            finalPoint += "Three of a Kind";
-            break;
-        case 2:  
-            finalPoint += "Two Pair";
-            break;
-        case 1:  
-            finalPoint += "Pair";
-            break;
-        case 0:  
-            finalPoint += "High Card";
-            switch (playerScore.card1) {
-                case 14:
-                    finalPoint += " -> Ace";
-                    break;
-                case 13:
-                    finalPoint += " -> King";
-                    break;
-                case 12:
-                    finalPoint += " -> Queen";
-                    break;
-                case 11:
-                    finalPoint += " -> Jack";
-                    break;
-                case 10:
-                case 9:
-                case 8:
-                case 7:
-                case 6:
-                case 5:
-                case 4:
-                case 3:
-                case 2:
-                    finalPoint += " -> " + playerScore.card1;
-                    break;
-            }
-            break;
+    finalPoint += score[playerScore.points];
+    if ( playerScore.points === 0 ) {
+        switch (playerScore.card1) {
+            case 14:
+                finalPoint += " -> Ace";
+                break;
+            case 13:
+                finalPoint += " -> King";
+                break;
+            case 12:
+                finalPoint += " -> Queen";
+                break;
+            case 11:
+                finalPoint += " -> Jack";
+                break;
+            default: 
+                finalPoint += " -> " + playerScore.card1;
+                break;
         }
+    }
     finalPoint += "</p>";
     return finalPoint;
 }
