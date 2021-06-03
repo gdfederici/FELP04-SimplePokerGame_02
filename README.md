@@ -40,9 +40,9 @@ The list of hands in ranking order are as follows:
 <br/>
 
 ## Link:
-https://jslp02-simplepokergame02.netlify.app/<br/>
+https://felp04-simplepokergame02.netlify.app/<br/>
 <br/>
 
 ## Note:
-**IT_** Cercato di usare un approccio più funzionale rispetto alla versione precedente (https://github.com/gdfederici/JS_LP02-SimplePokerGame_01).<br/>
-**EN_** Tried to use a more functional approach than the previous version (https://github.com/gdfederici/JS_LP02-SimplePokerGame_01).<br/>
+**IT_** Cercato di usare un approccio più funzionale rispetto alla versione precedente (https://github.com/gdfederici/FELP04-SimplePokerGame_01).<br/>
+**EN_** Tried to use a more functional approach than the previous version (https://github.com/gdfederici/FELP04-SimplePokerGame_01).<br/>
